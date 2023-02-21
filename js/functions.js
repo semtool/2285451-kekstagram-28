@@ -10,8 +10,7 @@ function checkString (phrase, limit){
   }
   return false;
 }
-
-
+checkString ('проверяемая строка', 10);
 
 
 // Функция для проверки, является ли строка палиндромом.
@@ -23,22 +22,22 @@ function checkString (phrase, limit){
 function checkPalindrome(phrase){
   const prePhrase = [];
   let newPhrase;
-  for (let i = 0; i <= phrase.length-1; i++){
+  for (let i = 0; i <= phrase.length - 1; i++){
 
     prePhrase.unshift(phrase[i]);
     newPhrase = prePhrase.join('');
   }
   if(phrase.toLowerCase() === newPhrase.toLowerCase()){
-    console.log(newPhrase);
-    console.log('палиндром');
+
+
     return true;
   }else{
-    console.log(newPhrase);
-    console.log('НЕпалиндром');
+
+
     return false;
   }
 }
-
+checkPalindrome('ДовОд');
 
 
 // Функция  извлекает содержащиеся в ней цифры от 0 до 9 и
@@ -61,7 +60,7 @@ function checkNum(frase){
   return strin;
 
 }
-
+checkNum('2023 год');
 
 
 //Решение из Лайва.
@@ -74,10 +73,7 @@ function checkNumber(frase){
   }
   return parseInt(strin, 10);
 }
-
-
-
-
+checkNumber('ECMAScript 2022');
 
 // // Функция, которая принимает три параметра: исходную строку, минимальную длину и строку с добавочными символами
 // // — и возвращает исходную строку, дополненную указанными символами до заданной длины.
@@ -103,20 +99,17 @@ function checkNumber(frase){
 // имя_функции('qwerty', 4, '0'); // 'qwerty'
 
 
-
 //  Решение из Лайва
 
 function addsSimbol (string, limit, add){
-   let realAdd = limit - string.length;
+  const realAdd = limit - string.length;
 
-   if(realAdd <= 0){
-    console.log(string);
+  if(realAdd <= 0){
+
     return string;
 
-   }
-
-   console.log('опера', add.slice(0, realAdd % add.length) + add.repeat(realAdd / add.length)+string);
-   return  add.slice(0, realAdd % add.length) + add.repeat(realAdd / add.length)+string;
+  }
+  return add.slice(0, realAdd % add.length) + add.repeat(realAdd / add.length) + string;
 }
 
-
+addsSimbol ('qwerty', 4, '0');
