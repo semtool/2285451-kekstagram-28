@@ -53,9 +53,12 @@ function checkNum(frase){
       numbers += frase[i];
     }
   }
+  if(numbers === ''){
+    return NaN;
+  }
   return numbers;
 }
-checkNum('2023 год');
+checkNum('а я томат');
 
 
 //Решение из Лайва.
