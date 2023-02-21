@@ -65,7 +65,7 @@ function checkNum(frase){
 
 
 //Решение из Лайва.
-function checkNum(frase){
+function checkNumber(frase){
   let strin = '';
   for(let i = 0; i <= frase.length - 1; i++){
     if(!Number.isNaN(parseInt(frase[i], 10))){
@@ -118,34 +118,5 @@ function addsSimbol (string, limit, add){
    console.log('опера', add.slice(0, realAdd % add.length) + add.repeat(realAdd / add.length)+string);
    return  add.slice(0, realAdd % add.length) + add.repeat(realAdd / add.length)+string;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
