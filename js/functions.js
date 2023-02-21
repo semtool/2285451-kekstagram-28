@@ -28,12 +28,8 @@ function checkPalindrome(phrase){
     newPhrase = prePhrase.join('');
   }
   if(phrase.toLowerCase() === newPhrase.toLowerCase()){
-
-
     return true;
   }else{
-
-
     return false;
   }
 }
@@ -51,27 +47,26 @@ checkPalindrome('ДовОд');
 
 // Мое решение
 function checkNum(frase){
-  let strin = '';
+  let numbers = '';
   for(let i = 0; i <= frase.length - 1; i++){
     if(!isNaN(frase[i]) && frase[i] !== ' '){
-      strin += frase[i];
+      numbers += frase[i];
     }
   }
-  return strin;
-
+  return numbers;
 }
 checkNum('2023 год');
 
 
 //Решение из Лайва.
 function checkNumber(frase){
-  let strin = '';
+  let numbers = '';
   for(let i = 0; i <= frase.length - 1; i++){
     if(!Number.isNaN(parseInt(frase[i], 10))){
-      strin += frase[i];
+      numbers += frase[i];
     }
   }
-  return parseInt(strin, 10);
+  return parseInt(numbers, 10);
 }
 checkNumber('ECMAScript 2022');
 
@@ -105,9 +100,7 @@ function addsSimbol (string, limit, add){
   const realAdd = limit - string.length;
 
   if(realAdd <= 0){
-
     return string;
-
   }
   return add.slice(0, realAdd % add.length) + add.repeat(realAdd / add.length) + string;
 }
