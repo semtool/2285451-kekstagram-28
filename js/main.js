@@ -69,8 +69,5 @@ const createDescription = () => ({
   }
 });
 
-
 const cardsDescriotion = Array.from({length: COUNT_CARDS}, createDescription);
 
-
-console.log(cardsDescriotion);
