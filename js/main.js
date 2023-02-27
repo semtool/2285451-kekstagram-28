@@ -16,8 +16,8 @@ const DESCRIPTION_LIST = [
   'Унты',
   'Реактивный след',
   'Хор',
-  'Ретро -авто',
-  'Фары- тапки',
+  'Ретро - авто',
+  'Фары - тапки',
   'Двор с пальмамами',
   'Завтрак вегана',
   'Морской закат',
@@ -53,21 +53,41 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
+function createRandomIdFromRangeGenerator (a, b) {
+  const previousValues = [];
+  return function () {
+    let currentValue = getRandomInteger(a, b);
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomInteger(a, b);
+    }
+    previousValues.push(currentValue);
+    return currentValue;
+  };
+}
+
+const generateUrl = createRandomIdFromRangeGenerator(1, 25);
+
+const generateId = createRandomIdFromRangeGenerator(1, 25);
+
+const generateIdAvatar = createRandomIdFromRangeGenerator(1, 250);
+
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
+const createComments = ()=>({
+  id: generateIdAvatar(),
+  avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
+  message: getRandomArrayElement(MESSAGE_LIST),
+  name: getRandomArrayElement(NAMES_LIST),
+});
+
+const cardsComments = Array.from({length: 4}, createComments);
+
 const createDescription = () => ({
-  id: getRandomInteger(0, 25),
-  url: `photos/ ${getRandomInteger(0, 25)}.jpg`,
+  id: generateId(),
+  url: `photos/${generateUrl()}.jpg`,
   description: getRandomArrayElement(DESCRIPTION_LIST),
   likes: getRandomInteger(15, 200),
-  comments:{
-    id: getRandomInteger(0, 220),
-    avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-    message: getRandomArrayElement(MESSAGE_LIST),
-    name: getRandomArrayElement(NAMES_LIST),
-  }
+  comments: cardsComments,
 });
 
 const cardsDescriotion = Array.from({length: COUNT_CARDS}, createDescription);
-
-console.log(cardsDescriotion);
