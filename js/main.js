@@ -1,1 +1,4 @@
-import {cardsDescriotion} from './create-description.js';
+import {generateCardsDescription} from './create-description.js';
+
+console.log(generateCardsDescription());
+

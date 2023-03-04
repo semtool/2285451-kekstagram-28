@@ -1,6 +1,6 @@
 import {getRandomInteger, createRandomIdFromRangeGenerator, getRandomArrayElement} from './util.js';
 
-import {cardsComments} from './create-comment.js';
+import {generateCardsComments} from './create-comment.js';
 
 const DESCRIPTION_LIST = [
   'Отель',
@@ -45,10 +45,10 @@ const createDescription = () => ({
   url: `photos/${generateUrl()}.jpg`,
   description: getRandomArrayElement(DESCRIPTION_LIST),
   likes: getRandomInteger(COUNT_LIKES_MIN, COUNT_LIKES_MAX),
-  comments: cardsComments(),
+  comments: generateCardsComments(),
 });
 
-const cardsDescriotion = () => Array.from({length: COUNT_CARDS}, createDescription);
+const generateCardsDescription = () => Array.from({length: COUNT_CARDS}, createDescription);
 
-export {cardsDescriotion};
+export {generateCardsDescription};
 
