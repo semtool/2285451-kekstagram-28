@@ -1,1 +1,2 @@
-import {generateCardsDescription} from './create-description.js';
+import {renderCards} from './draw-thumbnail.js';
+renderCards();
