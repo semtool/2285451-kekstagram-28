@@ -8,7 +8,7 @@ const thumbnailArray = generateCardsDescription();
 
 const thumbnailBox = document.createDocumentFragment();
 
-thumbnailArray .forEach((item)=>{
+thumbnailArray.forEach((item)=>{
   const newThumbnail = thumbnailTemplete.cloneNode(true);
   newThumbnail.querySelector('.picture__img').src = item.url;
   newThumbnail.querySelector('.picture__likes').textContent = item.likes;
