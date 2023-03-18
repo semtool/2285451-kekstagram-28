@@ -23,8 +23,6 @@ function closeBigPictureContainer () {
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
-bigPictureClose.addEventListener('click', () =>{
-  closeBigPictureContainer ();
-});
+bigPictureClose.addEventListener('click', closeBigPictureContainer);
 
 export {openBigPictureContainer, bigPictureContainer};
