@@ -1,7 +1,6 @@
 import { generateCardsDescription } from './create-description.js';
-import { generateCardsComments } from './create-comment.js';
-import { openBigPictureContainer, bigPictureContainer} from './show-large-photos.js';
 
+import { openBigPictureContainer, bigPictureContainer} from './show-large-photos.js';
 
 const picturesContainer = document.querySelector('.pictures');
 
@@ -11,7 +10,6 @@ const thumbnailBox = document.createDocumentFragment();
 
 const thumbnailArray = generateCardsDescription();
 
-const commentsArray = generateCardsComments();
 const commentstBlock = document.querySelector('.social__comments');
 const commentPattern = commentstBlock.querySelector('.social__comment');
 
@@ -21,6 +19,7 @@ thumbnailArray.forEach((item) => {
   newThumbnail.querySelector('.picture__img').alt = item.description;
   newThumbnail.querySelector('.picture__likes').textContent = item.likes;
   newThumbnail.querySelector('.picture__comments').textContent = item.comments.length;
+  newThumbnail.dataset.newThumbnailId = item.id;
   thumbnailBox.appendChild(newThumbnail);
 });
 
@@ -36,15 +35,20 @@ picturesContainer.addEventListener('click', (evt) => {
     bigPictureContainer.querySelector('.social__comment-count').classList.add('hidden');
     bigPictureContainer.querySelector('.comments-loader').classList.add('hidden');
     openBigPictureContainer();
+    commentstBlock.innerHTML = '';
+    thumbnailArray.find((item)=>{
+      if(item.id === + thumbnailClicked.dataset.newThumbnailId){
+        const commentsArray = item.comments;
+        commentsArray.forEach((comment) => {
+          const newComment = commentPattern.cloneNode(true);
+          newComment.querySelector('.social__picture').src = comment.avatar;
+          newComment.querySelector('.social__picture').alt = comment.name;
+          newComment.querySelector('.social__text').textContent = comment.message;
+          commentstBlock.appendChild(newComment);
+        });
+      }
+    });
   }
-});
-
-commentsArray.forEach((item) => {
-  const newComment = commentPattern.cloneNode(true);
-  newComment.querySelector('.social__picture').src = item.avatar;
-  newComment.querySelector('.social__picture').alt = item.name;
-  newComment.querySelector('.social__text').textContent = item.message;
-  commentstBlock.appendChild(newComment);
 });
 
 export { renderCards };
