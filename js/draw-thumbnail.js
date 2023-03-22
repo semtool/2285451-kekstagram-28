@@ -47,9 +47,9 @@ thumbnailArray.forEach((item) => {
         for (let i = 0 ; i < quantityComments ; i++) {
           const newComment = commentPattern.cloneNode(true);
 
-          if(addedComments >= sameId.comments.length){
+          if(quantityComments >= sameId.comments.length){
             bigPictureContainer.querySelector('.comments-loader').classList.add('hidden');
-            break;
+            quantityComments = sameId.comments.length;
           }else{
             bigPictureContainer.querySelector('.comments-loader').classList.remove('hidden');
           }

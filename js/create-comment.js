@@ -18,7 +18,7 @@ const NAMES_LIST = [
   'Ioan',
 ];
 
-const generateIdAvatar = createRandomIdFromRangeGenerator(1, 250);
+const generateIdAvatar = createRandomIdFromRangeGenerator(1, 300);
 
 const createComments = ()=>({
   id: generateIdAvatar(),
@@ -27,6 +27,6 @@ const createComments = ()=>({
   name: getRandomArrayElement(NAMES_LIST),
 });
 
-const generateCardsComments = () => Array.from({length: 10}, createComments);
+const generateCardsComments = () => Array.from({length: 12}, createComments);
 
 export {generateCardsComments};
