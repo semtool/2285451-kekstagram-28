@@ -2,6 +2,8 @@ import { generateCardsDescription } from './create-description.js';
 
 import { openBigPictureContainer, bigPictureContainer} from './show-large-photos.js';
 
+const PPORTION_COMMENTS = 5;
+
 const picturesContainer = document.querySelector('.pictures');
 
 const thumbnailTemplete = document.querySelector('#picture').content.querySelector('.picture');
@@ -15,7 +17,6 @@ const commentPattern = commentstBlock.querySelector('.social__comment');
 
 const coutns = bigPictureContainer.querySelector('.social__comment-count');
 const loaders = bigPictureContainer.querySelector('.comments-loader');
-const PPORTION_COMMENTS = 5;
 
 thumbnailArray.forEach((item) => {
   const newThumbnail = thumbnailTemplete.cloneNode(true);
