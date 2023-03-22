@@ -27,6 +27,6 @@ const createComments = ()=>({
   name: getRandomArrayElement(NAMES_LIST),
 });
 
-const generateCardsComments = () => Array.from({length: 9}, createComments);
+const generateCardsComments = () => Array.from({length: 10}, createComments);
 
 export {generateCardsComments};

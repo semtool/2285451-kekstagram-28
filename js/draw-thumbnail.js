@@ -15,12 +15,11 @@ const commentPattern = commentstBlock.querySelector('.social__comment');
 
 const coutns = bigPictureContainer.querySelector('.social__comment-count');
 const loaders = bigPictureContainer.querySelector('.comments-loader');
-
-
-
+const PPORTION_COMMENTS = 5;
 
 thumbnailArray.forEach((item) => {
   const newThumbnail = thumbnailTemplete.cloneNode(true);
+
   newThumbnail.querySelector('.picture__img').src = item.url;
   newThumbnail.querySelector('.picture__img').alt = item.description;
   newThumbnail.querySelector('.picture__likes').textContent = item.likes;
@@ -38,10 +37,8 @@ thumbnailArray.forEach((item) => {
 
     const sameId = thumbnailArray.find((thumbnail)=> thumbnail.id === +newThumbnail.dataset.newThumbnailId);
     let quantityComments = 0;
-    const portionComments = 5;
-
     function addPortionComments () {
-      quantityComments += portionComments;
+      quantityComments += PPORTION_COMMENTS;
       let addedComments = 0;
       commentstBlock.innerHTML = '';
 
@@ -51,6 +48,7 @@ thumbnailArray.forEach((item) => {
 
           if(addedComments >= sameId.comments.length){
             bigPictureContainer.querySelector('.comments-loader').classList.add('hidden');
+            break;
           }else{
             bigPictureContainer.querySelector('.comments-loader').classList.remove('hidden');
           }
@@ -73,4 +71,3 @@ thumbnailArray.forEach((item) => {
 const renderCards = () => picturesContainer.appendChild(thumbnailBox);
 
 export { renderCards };
-
