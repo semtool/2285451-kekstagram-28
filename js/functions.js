@@ -129,8 +129,6 @@ addsSimbol ('qwerty', 4, '0');
 //   errorTextClass: 'img-upload__field-wrapper__eror'
 // });
 
-
-
 // const onEscapeFormClose = (evt) => {
 //   if (evt.key === 'Escape') {
 //     if(inputTextHashtags === document.activeElement || inputTextDescription === document.activeElement) {
