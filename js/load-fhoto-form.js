@@ -15,7 +15,6 @@ const onExitFromFormByEsc = (evt) => {
     if(hashtagField === document.activeElement || descriptionField === document.activeElement) {
       return;
     }
-    evt.preventDefault();
     mainEditingForm.reset();
     onCloseEditingForm();
   }
