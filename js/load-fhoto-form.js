@@ -10,27 +10,27 @@ const descriptionField = editingForm.querySelector('.text__description');
 
 const mainEditingForm = document.querySelector('#upload-select-image');
 
-const onDocumentKeydown = (evt) => {
+const onExitFromFormByEsc = (evt) => {
   if (evt.key === 'Escape') {
     if(hashtagField === document.activeElement || descriptionField === document.activeElement) {
-      return false;
+      return;
     }
     evt.preventDefault();
     mainEditingForm.reset();
-    closeEditingForm();
+    onCloseEditingForm();
   }
 };
 
-function openEditingForm () {
+function onOpenEditingForm () {
   editingForm.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
+  document.addEventListener('keydown', onExitFromFormByEsc);
 }
 
-function closeEditingForm () {
+function onCloseEditingForm () {
   editingForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onDocumentKeydown);
+  document.removeEventListener('keydown', onExitFromFormByEsc);
   loadingFileButton.value = '';
   mainEditingForm.reset();
 }
@@ -68,6 +68,6 @@ const onValidData = (evt)=> {
   }
 };
 
-loadingFileButton.addEventListener('change', openEditingForm);
-outputEditingForm.addEventListener('click', closeEditingForm);
+loadingFileButton.addEventListener('change', onOpenEditingForm);
+outputEditingForm.addEventListener('click', onCloseEditingForm);
 mainEditingForm.addEventListener('submit', onValidData);
