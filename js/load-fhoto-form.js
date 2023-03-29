@@ -1,11 +1,9 @@
+import {recetEffects} from './change-effects.js';
+import {onReturnDafaultScale} from './change-scale.js';
+
 const CORRECT_HASHTAG_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASHTAG_QUANTITY = 5;
 const ERROR_MESSAGE = 'Правильно заполните поле';
-
-const DEFAULT_SCALE = 100;
-const STEP_SCALE = 25;
-const MIN_SCALE = 25;
-
 
 const editingForm = document.querySelector('.img-upload__overlay');
 const loadingFileButton = document.querySelector('#upload-file');
@@ -14,11 +12,6 @@ const hashtagField = editingForm.querySelector('.text__hashtags');
 const descriptionField = editingForm.querySelector('.text__description');
 
 const mainEditingForm = document.querySelector('#upload-select-image');
-
-const photoPreview = document.querySelector('.img-upload__preview > img ');
-const buttonPhotoBigger = document.querySelector('.scale__control--bigger');
-const buttonPhotoSmaller = document.querySelector('.scale__control--smaller');
-const outputScale = document.querySelector('.scale__control--value');
 
 const onExitFromFormByEsc = (evt) => {
   if (evt.key === 'Escape') {
@@ -43,6 +36,7 @@ function onCloseEditingForm () {
   loadingFileButton.value = '';
   mainEditingForm.reset();
   onReturnDafaultScale();
+  recetEffects();
 }
 
 const pristine = new Pristine(mainEditingForm, {
@@ -78,63 +72,6 @@ const onValidData = (evt)=> {
   }
 };
 
-let scaleNumber = parseInt(outputScale.value, 10);
-
-function onChangeScale (volue) {
-  outputScale.value = `${volue}%`;
-  photoPreview.style.transform = `scale(${ volue / 100})`;
-}
-
-function onIncreaseStepScale () {
-  if(scaleNumber < DEFAULT_SCALE){
-    scaleNumber += STEP_SCALE;
-    onChangeScale(scaleNumber);
-  }
-}
-
-function onDecreaseStepScale () {
-  if(scaleNumber > MIN_SCALE){
-    scaleNumber -= STEP_SCALE;
-    onChangeScale(scaleNumber);
-  }
-}
-
-function onReturnDafaultScale () {
-  scaleNumber = DEFAULT_SCALE;
-  onChangeScale(DEFAULT_SCALE);
-}
-
 loadingFileButton.addEventListener('change', onOpenEditingForm);
 outputEditingForm.addEventListener('click', onCloseEditingForm);
 mainEditingForm.addEventListener('submit', onValidData);
-
-buttonPhotoBigger.addEventListener('click', onIncreaseStepScale);
-buttonPhotoSmaller.addEventListener('click', onDecreaseStepScale);
-
-
-
-
-
-const Element = document.querySelector('.img-upload__preview');
-const none = document.querySelector('.effects__list');
-const sliderElement = document.querySelector('effect-level__slider');
-const sepia = document.querySelector('#effect-sepia');
-const marvin = document.querySelector('#effect-marvin');
-const phobos = document.querySelector('#effect-phobos');
-const heat = document.querySelector('#effect-heat');
-
-
-// none.addEventListener('click', (evt)=>{
-//     if(evt.target.value){
-//       Element.className = `effects__preview--${evt.target.value}`;
-//     }
-// });
-
-
-noUiSlider.create(sliderElement, {
-  range: {
-    min: 0,
-    max: 100,
-  },
-  start: 80,
-});

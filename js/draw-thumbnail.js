@@ -1,6 +1,6 @@
-import { generateCardsDescription } from './create-description.js';
+import {generateCardsDescription} from './create-description.js';
 
-import { openBigPictureContainer, bigPictureContainer} from './show-large-photos.js';
+import {openBigPictureContainer, bigPictureContainer} from './show-large-photos.js';
 
 const PPORTION_COMMENTS = 5;
 
