@@ -51,4 +51,3 @@ const createDescription = () => ({
 const generateCardsDescription = () => Array.from({length: COUNT_CARDS}, createDescription);
 
 export {generateCardsDescription};
-

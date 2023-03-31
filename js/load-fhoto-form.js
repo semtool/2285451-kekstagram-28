@@ -1,3 +1,6 @@
+import {recetEffects} from './change-effects.js';
+import {onReturnDafaultScale} from './change-scale.js';
+
 const CORRECT_HASHTAG_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASHTAG_QUANTITY = 5;
 const ERROR_MESSAGE = 'Правильно заполните поле';
@@ -32,6 +35,8 @@ function onCloseEditingForm () {
   document.removeEventListener('keydown', onExitFromFormByEsc);
   loadingFileButton.value = '';
   mainEditingForm.reset();
+  onReturnDafaultScale();
+  recetEffects();
 }
 
 const pristine = new Pristine(mainEditingForm, {
