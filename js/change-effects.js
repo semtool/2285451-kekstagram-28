@@ -56,8 +56,7 @@ const SET_OF_FILTERS = [
   },
 ];
 
-const START_SET = SET_OF_FILTERS[0];
-let CLICKED_SET = START_SET;
+let clickedSet = SET_OF_FILTERS[0];
 
 const effectsBlock = document.querySelector('.effects');
 const sliderSetsContainer = document.querySelector('.img-upload__effect-level');
@@ -74,48 +73,47 @@ function showSlaiderContainer () {
 
 const templateSlider = ()=> sliderElement.noUiSlider.updateOptions({
   range: {
-    min: CLICKED_SET.min,
-    max: CLICKED_SET.max,
+    min: clickedSet.min,
+    max: clickedSet.max,
   },
-  step: CLICKED_SET.step,
-  start: CLICKED_SET.max,
+  step: clickedSet.step,
+  start: clickedSet.max,
 });
 
 function recetEffects () {
-  CLICKED_SET = START_SET;
+  clickedSet = SET_OF_FILTERS[0];
   templateSlider();
 }
 
 const onAddsClassEffect = (evt) => {
-  CLICKED_SET = SET_OF_FILTERS.find((set)=> set.name === evt.target.value);
-  photoPreview.className = `effects__preview--${CLICKED_SET.name}`;
+  clickedSet = SET_OF_FILTERS.find((set)=> set.name === evt.target.value);
+  photoPreview.className = `effects__preview--${clickedSet.name}`;
   templateSlider();
 };
 
-effectsBlock.addEventListener('change', onAddsClassEffect);
-
 noUiSlider.create(sliderElement, {
   range: {
-    min: START_SET.min,
-    max: START_SET.min,
+    min: SET_OF_FILTERS[0].min,
+    max: SET_OF_FILTERS[0].min,
   },
-  start: START_SET.min,
-  step: START_SET.min,
+  start: SET_OF_FILTERS[0].min,
+  step: SET_OF_FILTERS[0].min,
   connect: 'lower',
 });
 
 const onChangeLevelEffect = () => {
   const sliderLevel = sliderElement.noUiSlider.get() ;
-  if(CLICKED_SET === START_SET){
-    photoPreview.style.filter = START_SET.style;
+  if(clickedSet === SET_OF_FILTERS[0]){
+    photoPreview.style.filter = SET_OF_FILTERS[0].style;
     hideSlaiderContainer();
   }else{
-    photoPreview.style.filter = `${CLICKED_SET.style}(${sliderLevel}${CLICKED_SET.unit})`;
+    photoPreview.style.filter = `${clickedSet.style}(${sliderLevel}${clickedSet.unit})`;
     levelEffect.value = sliderLevel;
     showSlaiderContainer();
   }
 };
 
+effectsBlock.addEventListener('change', onAddsClassEffect);
 sliderElement.noUiSlider.on('update', onChangeLevelEffect);
 
 export {recetEffects};
