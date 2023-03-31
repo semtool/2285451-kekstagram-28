@@ -94,10 +94,10 @@ const onAddsClassEffect = (evt) => {
 noUiSlider.create(sliderElement, {
   range: {
     min: SET_OF_FILTERS[0].min,
-    max: SET_OF_FILTERS[0].min,
+    max: SET_OF_FILTERS[0].max,
   },
   start: SET_OF_FILTERS[0].min,
-  step: SET_OF_FILTERS[0].min,
+  step: SET_OF_FILTERS[0].step,
   connect: 'lower',
 });
 
