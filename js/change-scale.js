@@ -31,7 +31,7 @@ function onDecreaseStepScale () {
 
 function onReturnDafaultScale () {
   scaleNumber = DEFAULT_SCALE;
-  onChangeScale(DEFAULT_SCALE);
+  onChangeScale(scaleNumber);
 }
 
 buttonPhotoBigger.addEventListener('click', onIncreaseStepScale);
