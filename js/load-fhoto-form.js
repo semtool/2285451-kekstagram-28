@@ -21,7 +21,7 @@ const errorTemplate = document.querySelector('#error').content;
 const errorBox = document.createDocumentFragment();
 const newErrorTamplate = errorTemplate.cloneNode(true);
 const newErrorSection = newErrorTamplate.querySelector('.error');
-const tryButtun = newErrorTamplate.querySelector('.error__button');
+const errorButtun = newErrorTamplate.querySelector('.error__button');
 errorBox.appendChild(newErrorTamplate);
 
 const successTemplate = document.querySelector('#success').content;
@@ -103,7 +103,7 @@ const setUserFormSubmit = () => {
       sendData(new FormData(evt.target))
         .then(() => {
           onCloseEditingForm();
-          createssuccessMesage();
+          createSsuccessMesage();
         })
         .catch(() => {
           createsErrorMesage();
@@ -113,7 +113,7 @@ const setUserFormSubmit = () => {
   });
 };
 
-const onEscErrorMesage = (evt) => {
+const onEscapeErrorMesage = (evt) => {
   if (evt.key === 'Escape') {
     onHideErrorMesage();
   }
@@ -129,41 +129,41 @@ function createsErrorMesage () {
   document.body.append(errorBox);
   newErrorSection.classList.remove('hidden');
   document.removeEventListener('keydown', onExitFromFormByEsc);
-  document.addEventListener('keydown', onEscErrorMesage);
+  document.addEventListener('keydown', onEscapeErrorMesage);
 }
 
 function onHideErrorMesage () {
   newErrorSection.classList.add('hidden');
-  document.removeEventListener('keydown', onEscErrorMesage);
+  document.removeEventListener('keydown', onEscapeErrorMesage);
   document.addEventListener('keydown', onExitFromFormByEsc);
 }
 
-const onEscsuccessMesage = (evt) => {
+const onEscapeSuccessMesage = (evt) => {
   if (evt.key === 'Escape') {
     onHidesuccessMesage();
   }
 };
 
-const onClosesuccessMesage = (evt) => {
+const onCloseSuccessMesage = (evt) => {
   if (evt.target === newSuccessSection) {
     onHidesuccessMesage();
   }
 };
 
-function createssuccessMesage () {
+function createSsuccessMesage () {
   document.body.append(successBox);
   newSuccessSection.classList.remove('hidden');
-  document.addEventListener('keydown', onEscsuccessMesage);
+  document.addEventListener('keydown', onEscapeSuccessMesage);
 }
 
 function onHidesuccessMesage () {
   newSuccessSection.classList.add('hidden');
-  document.removeEventListener('keydown', onEscsuccessMesage);
+  document.removeEventListener('keydown', onEscapeSuccessMesage);
 }
 
 newErrorSection.addEventListener('click', onCloseErrorMesage);
-tryButtun.addEventListener('click',onHideErrorMesage);
-newSuccessSection.addEventListener('click', onClosesuccessMesage);
+errorButtun.addEventListener('click',onHideErrorMesage);
+newSuccessSection.addEventListener('click', onCloseSuccessMesage);
 successButtun.addEventListener('click',onHidesuccessMesage);
 
-export { setUserFormSubmit, loadingFileButton};
+export { setUserFormSubmit };

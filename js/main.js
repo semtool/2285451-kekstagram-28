@@ -2,7 +2,7 @@ import {renderCards} from './draw-thumbnail.js';
 
 import {getData} from './server-interaction.js';
 
-import {setUserFormSubmit,loadingFileButton} from './load-fhoto-form.js';
+import {setUserFormSubmit} from './load-fhoto-form.js';
 import {showAlert} from './util.js';
 
 getData()
@@ -12,7 +12,6 @@ getData()
   .catch(
     (err) => {
       showAlert(err.message);
-      loadingFileButton.setAttribute('disabled', true);
     }
   );
 
