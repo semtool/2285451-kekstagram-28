@@ -1,5 +1,3 @@
-import {generateCardsDescription} from './create-description.js';
-
 import {openBigPictureContainer, bigPictureContainer} from './show-large-photos.js';
 
 const PPORTION_COMMENTS = 5;
@@ -10,7 +8,7 @@ const thumbnailTemplete = document.querySelector('#picture').content.querySelect
 
 const thumbnailBox = document.createDocumentFragment();
 
-const thumbnailArray = generateCardsDescription();
+// const thumbnailArray = generateCardsDescription();
 
 const commentstBlock = document.querySelector('.social__comments');
 const commentPattern = commentstBlock.querySelector('.social__comment');
@@ -18,57 +16,61 @@ const commentPattern = commentstBlock.querySelector('.social__comment');
 const coutns = bigPictureContainer.querySelector('.social__comment-count');
 const loaders = bigPictureContainer.querySelector('.comments-loader');
 
-thumbnailArray.forEach((item) => {
-  const newThumbnail = thumbnailTemplete.cloneNode(true);
 
-  newThumbnail.querySelector('.picture__img').src = item.url;
-  newThumbnail.querySelector('.picture__img').alt = item.description;
-  newThumbnail.querySelector('.picture__likes').textContent = item.likes;
-  newThumbnail.querySelector('.picture__comments').textContent = item.comments.length;
-  newThumbnail.dataset.newThumbnailId = item.id;
-  thumbnailBox.appendChild(newThumbnail);
+const renderCards = (thumbnailArray) => {
 
-  newThumbnail.addEventListener('click', () => {
+  thumbnailArray.forEach((item) => {
+    const newThumbnail = thumbnailTemplete.cloneNode(true);
 
-    openBigPictureContainer();
-    bigPictureContainer.querySelector('.big-picture__img > img').src = newThumbnail.querySelector('.picture__img').src;
-    bigPictureContainer.querySelector('.likes-count').textContent = newThumbnail.querySelector('.picture__likes').textContent;
-    bigPictureContainer.querySelector('.comments-count').textContent = newThumbnail.querySelector('.picture__comments').textContent;
-    bigPictureContainer.querySelector('.social__caption').textContent = newThumbnail.querySelector('.picture__img').alt;
+    newThumbnail.querySelector('.picture__img').src = item.url;
+    newThumbnail.querySelector('.picture__img').alt = item.description;
+    newThumbnail.querySelector('.picture__likes').textContent = item.likes;
+    newThumbnail.querySelector('.picture__comments').textContent = item.comments.length;
+    newThumbnail.dataset.newThumbnailId = item.id;
+    thumbnailBox.appendChild(newThumbnail);
 
-    const sameId = thumbnailArray.find((thumbnail)=> thumbnail.id === +newThumbnail.dataset.newThumbnailId);
-    let quantityComments = 0;
-    function addPortionComments () {
-      quantityComments += PPORTION_COMMENTS;
-      let addedComments = 0;
-      commentstBlock.innerHTML = '';
+    newThumbnail.addEventListener('click', () => {
 
-      if(sameId){
-        for (let i = 0 ; i < quantityComments ; i++) {
-          const newComment = commentPattern.cloneNode(true);
+      openBigPictureContainer();
+      bigPictureContainer.querySelector('.big-picture__img > img').src = newThumbnail.querySelector('.picture__img').src;
+      bigPictureContainer.querySelector('.likes-count').textContent = newThumbnail.querySelector('.picture__likes').textContent;
+      bigPictureContainer.querySelector('.comments-count').textContent = newThumbnail.querySelector('.picture__comments').textContent;
+      bigPictureContainer.querySelector('.social__caption').textContent = newThumbnail.querySelector('.picture__img').alt;
 
-          if(quantityComments >= sameId.comments.length){
-            bigPictureContainer.querySelector('.comments-loader').classList.add('hidden');
-            quantityComments = sameId.comments.length;
-          }else{
-            bigPictureContainer.querySelector('.comments-loader').classList.remove('hidden');
+      const sameId = thumbnailArray.find((thumbnail)=> thumbnail.id === +newThumbnail.dataset.newThumbnailId);
+      let quantityComments = 0;
+      function addPortionComments () {
+        quantityComments += PPORTION_COMMENTS;
+        let addedComments = 0;
+        commentstBlock.innerHTML = '';
+
+        if(sameId){
+          for (let i = 0 ; i < quantityComments ; i++) {
+            const newComment = commentPattern.cloneNode(true);
+
+            if(quantityComments >= sameId.comments.length){
+              bigPictureContainer.querySelector('.comments-loader').classList.add('hidden');
+              quantityComments = sameId.comments.length;
+            }else{
+              bigPictureContainer.querySelector('.comments-loader').classList.remove('hidden');
+            }
+            newComment.querySelector('.social__picture').src = sameId.comments[i].avatar;
+            newComment.querySelector('.social__picture').alt = sameId.comments[i].name;
+            newComment.querySelector('.social__text').textContent = sameId.comments[i].message;
+            commentstBlock.appendChild(newComment);
+            addedComments ++;
+            coutns.innerHTML = `${addedComments} из <span class="comments-count">${sameId.comments.length}</span> комментариев`;
           }
-          newComment.querySelector('.social__picture').src = sameId.comments[i].avatar;
-          newComment.querySelector('.social__picture').alt = sameId.comments[i].name;
-          newComment.querySelector('.social__text').textContent = sameId.comments[i].message;
-          commentstBlock.appendChild(newComment);
-          addedComments ++;
-          coutns.innerHTML = `${addedComments} из <span class="comments-count">${sameId.comments.length}</span> комментариев`;
         }
       }
-    }
 
-    addPortionComments();
+      addPortionComments();
 
-    loaders.addEventListener('click', addPortionComments);
+      loaders.addEventListener('click', addPortionComments);
+    });
   });
-});
 
-const renderCards = () => picturesContainer.appendChild(thumbnailBox);
+  picturesContainer.appendChild(thumbnailBox);
+};
 
 export { renderCards };
