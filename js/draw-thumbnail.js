@@ -66,8 +66,7 @@ const renderCards = (thumbnailArray) => {
       loaders.addEventListener('click', addPortionComments);
     });
   });
-
   picturesContainer.appendChild(thumbnailBox);
 };
 
-export { renderCards };
+export { renderCards, picturesContainer};
