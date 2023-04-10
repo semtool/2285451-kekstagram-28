@@ -1,6 +1,6 @@
 import {renderCards} from './draw-thumbnail.js';
 
-import {showFiltersContainer, sortsRandomly, sortsByRating, selectedByRating, selectedRandomly, selectedDefolt, debounce} from './photo-list.js';
+import {showFiltersContainer, selectFilter} from './photo-list.js';
 
 import {getData} from './server-interaction.js';
 
@@ -11,9 +11,7 @@ getData()
   .then((arrCards) => {
     renderCards(arrCards);
     showFiltersContainer();
-    selectedDefolt(debounce(()=> renderCards(arrCards)));
-    selectedRandomly(debounce(() => renderCards(sortsRandomly(arrCards))));
-    selectedByRating(debounce(() => renderCards(sortsByRating(arrCards))));
+    selectFilter (arrCards);
   })
   .catch(
     (err) => {

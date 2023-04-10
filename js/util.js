@@ -19,7 +19,6 @@ function createRandomIdFromRangeGenerator (a, b) {
   };
 }
 
-
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = '100';
@@ -41,6 +40,14 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-export {getRandomInteger, getRandomArrayElement, createRandomIdFromRangeGenerator, showAlert};
+export {getRandomInteger, getRandomArrayElement, createRandomIdFromRangeGenerator, showAlert, debounce};

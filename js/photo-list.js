@@ -1,64 +1,41 @@
-import { picturesContainer } from './draw-thumbnail.js';
+import { picturesContainer, renderCards } from './draw-thumbnail.js';
+import { debounce } from './util.js';
 
 const PPORTION_PFOTOS = 10;
 
-const cleansFiltersContainer = (contain) => {
-  contain.querySelectorAll('.picture').forEach((element)=>element.remove());
-};
-
 const filtersContainer = document.querySelector('.img-filters');
-// filtersContainer.classList.remove('img-filters--inactive');
-const discussedButton = filtersContainer.querySelector('#filter-discussed');
-const randomButton = filtersContainer.querySelector('#filter-random');
-const defaultButton = filtersContainer.querySelector('#filter-default');
 
 const showFiltersContainer = () => filtersContainer.classList.remove('img-filters--inactive');
-
-const sortsRandomly = (mass) => mass.slice().sort(() => Math.random() - 0.5).slice(0, PPORTION_PFOTOS);
-const sortsByRating = (mass) => mass.slice().sort((picA,picB) => picB.comments.length - picA.comments.length);
 
 const cleansButtonStatus = () => {
   const allButtons = filtersContainer.querySelectorAll('.img-filters__button');
   allButtons.forEach((element)=>element.classList.remove('img-filters__button--active'));
 };
 
-const addsButtonStatus = (evt) => {
-  evt.target.classList.add('img-filters__button--active');
+const cleansPicturesContainer = (container) => {
+  container.querySelectorAll('.picture').forEach((element)=>element.remove());
 };
 
-const selectedByRating = (rendering) => {
-  discussedButton.addEventListener('click', (evt) => {
-    cleansButtonStatus();
-    addsButtonStatus (evt);
-    cleansFiltersContainer(picturesContainer);
-    rendering();
+const debouncedRenderCards = debounce(renderCards);
+const debouncedCleansPicturesContainer = debounce(cleansPicturesContainer);
+let filteredData = [];
+
+const selectFilter = (data) => {
+  filtersContainer.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('img-filters__button')){
+      cleansButtonStatus();
+      evt.target.classList.add('img-filters__button--active');
+      if(evt.target.id === 'filter-random'){
+        filteredData = data.slice().sort(() => Math.random() - 0.5).slice(0, PPORTION_PFOTOS);
+      }else if(evt.target.id === 'filter-discussed'){
+        filteredData = data.slice().sort((picA,picB) => picB.comments.length - picA.comments.length);
+      }else{
+        filteredData = data;
+      }
+      debouncedCleansPicturesContainer(picturesContainer);
+      debouncedRenderCards(filteredData);
+    }
   });
 };
 
-const selectedRandomly = (rendering) => {
-  randomButton.addEventListener('click', (evt) => {
-    cleansButtonStatus();
-    addsButtonStatus (evt);
-    cleansFiltersContainer(picturesContainer);
-    rendering();
-  });
-};
-
-const selectedDefolt = (rendering) => {
-  defaultButton.addEventListener('click', (evt) => {
-    cleansButtonStatus();
-    addsButtonStatus (evt);
-    cleansFiltersContainer(picturesContainer);
-    rendering();
-  });
-};
-
-function debounce (callback, timeoutDelay = 500) {
-  let timeoutId;
-  return (...rest) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
-  };
-}
-
-export {showFiltersContainer, sortsRandomly, sortsByRating, selectedByRating, selectedRandomly, selectedDefolt, debounce};
+export {showFiltersContainer, selectFilter};
