@@ -11,7 +11,7 @@ getData()
   .then((arrCards) => {
     renderCards(arrCards);
     showFiltersContainer();
-    selectFilter (arrCards);
+    selectFilter(arrCards);
   })
   .catch(
     (err) => {

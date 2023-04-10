@@ -31,6 +31,14 @@ const newSuccessSection = newSuccessTamplate.querySelector('.success');
 const successButtun = newSuccessTamplate.querySelector('.success__button');
 successBox.appendChild(newSuccessTamplate);
 
+const fileField = document.querySelector('.img-upload__start input[type=file]');
+const previewPhoto = document.querySelector('.img-upload__preview img');
+
+fileField.addEventListener('change', () => {
+  const photo = fileField.files[0];
+  previewPhoto.src = URL.createObjectURL(photo);
+});
+
 const onExitFromFormByEsc = (evt) => {
   if (evt.key === 'Escape') {
     if(hashtagField === document.activeElement || descriptionField === document.activeElement) {

@@ -3,6 +3,12 @@ import { debounce } from './util.js';
 
 const PPORTION_PFOTOS = 10;
 
+const FilterSemples = {
+  DEFAULT: 'filter-default',
+  DISCUSSED: 'filter-discussed',
+  RANDOM: 'filter-random',
+};
+
 const filtersContainer = document.querySelector('.img-filters');
 const showFiltersContainer = () => filtersContainer.classList.remove('img-filters--inactive');
 
@@ -21,14 +27,14 @@ let filteredData = [];
 
 const selectFilter = (data) => {
   filtersContainer.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('img-filters__button')){
+    if (evt.target.classList.contains('img-filters__button')) {
       cleansButtonStatus();
       evt.target.classList.add('img-filters__button--active');
-      if(evt.target.id === 'filter-random'){
+      if (evt.target.id === FilterSemples.RANDOM) {
         filteredData = data.slice().sort(() => Math.random() - 0.5).slice(0, PPORTION_PFOTOS);
-      }else if(evt.target.id === 'filter-discussed'){
+      } else if (evt.target.id === FilterSemples.DISCUSSED) {
         filteredData = data.slice().sort((picA,picB) => picB.comments.length - picA.comments.length);
-      }else if(evt.target.id === 'filter-default'){
+      } else if (evt.target.id === FilterSemples.DEFAULT) {
         filteredData = data;
       }
       debouncedCleansPicturesContainer(picturesContainer);
