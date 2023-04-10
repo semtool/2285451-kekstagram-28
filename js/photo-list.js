@@ -4,7 +4,6 @@ import { debounce } from './util.js';
 const PPORTION_PFOTOS = 10;
 
 const filtersContainer = document.querySelector('.img-filters');
-// gkgkgkgkgkgk
 const showFiltersContainer = () => filtersContainer.classList.remove('img-filters--inactive');
 
 const cleansButtonStatus = () => {
@@ -29,7 +28,7 @@ const selectFilter = (data) => {
         filteredData = data.slice().sort(() => Math.random() - 0.5).slice(0, PPORTION_PFOTOS);
       }else if(evt.target.id === 'filter-discussed'){
         filteredData = data.slice().sort((picA,picB) => picB.comments.length - picA.comments.length);
-      }else{
+      }else if(evt.target.id === 'filter-default'){
         filteredData = data;
       }
       debouncedCleansPicturesContainer(picturesContainer);
