@@ -4,7 +4,7 @@ import { debounce } from './util.js';
 const PPORTION_PFOTOS = 10;
 
 const filtersContainer = document.querySelector('.img-filters');
-
+// gkgkgkgkgkgk
 const showFiltersContainer = () => filtersContainer.classList.remove('img-filters--inactive');
 
 const cleansButtonStatus = () => {
