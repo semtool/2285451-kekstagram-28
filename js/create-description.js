@@ -2,7 +2,7 @@ import {getRandomInteger, createRandomIdFromRangeGenerator, getRandomArrayElemen
 
 import {generateCardsComments} from './create-comment.js';
 
-const DESCRIPTION_LIST = [
+const DESCRIPTIONS_LIST = [
   'Отель',
   'Направление',
   'Пляж',
@@ -43,7 +43,7 @@ const generateId = createRandomIdFromRangeGenerator(1, COUNT_CARDS);
 const createDescription = () => ({
   id: generateId(),
   url: `photos/${generateUrl()}.jpg`,
-  description: getRandomArrayElement(DESCRIPTION_LIST),
+  description: getRandomArrayElement(DESCRIPTIONS_LIST),
   likes: getRandomInteger(COUNT_LIKES_MIN, COUNT_LIKES_MAX),
   comments: generateCardsComments(),
 });
