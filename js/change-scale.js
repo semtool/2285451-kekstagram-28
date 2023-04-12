@@ -10,9 +10,9 @@ const outputScale = document.querySelector('.scale__control--value');
 
 let scaleNumber = parseInt(outputScale.value, 10);
 
-function onChangeScale (volue) {
-  outputScale.value = `${volue}%`;
-  photoPreview.style.transform = `scale(${ volue / 100})`;
+function onChangeScale (value) {
+  outputScale.value = `${value}%`;
+  photoPreview.style.transform = `scale(${ value / 100})`;
 }
 
 function onIncreaseStepScale () {

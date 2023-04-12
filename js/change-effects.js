@@ -1,5 +1,5 @@
 import {photoPreview} from './change-scale.js';
-const SET_OF_FILTERS = [
+const FILTERS = [
   {
     name: 'none',
     style: 'none',
@@ -56,7 +56,7 @@ const SET_OF_FILTERS = [
   },
 ];
 
-let clickedSet = SET_OF_FILTERS[0];
+let clickedSet = FILTERS[0];
 
 const effectsBlock = document.querySelector('.effects');
 const sliderSetsContainer = document.querySelector('.img-upload__effect-level');
@@ -71,7 +71,7 @@ function showSlaiderContainer () {
   sliderSetsContainer.classList.remove('hidden');
 }
 
-const templateSlider = ()=> sliderElement.noUiSlider.updateOptions({
+const createsTemplateSlider = () => sliderElement.noUiSlider.updateOptions({
   range: {
     min: clickedSet.min,
     max: clickedSet.max,
@@ -81,30 +81,30 @@ const templateSlider = ()=> sliderElement.noUiSlider.updateOptions({
 });
 
 function recetEffects () {
-  clickedSet = SET_OF_FILTERS[0];
-  templateSlider();
+  clickedSet = FILTERS[0];
+  createsTemplateSlider();
 }
 
 const onAddsClassEffect = (evt) => {
-  clickedSet = SET_OF_FILTERS.find((set)=> set.name === evt.target.value);
+  clickedSet = FILTERS.find((set)=> set.name === evt.target.value);
   photoPreview.className = `effects__preview--${clickedSet.name}`;
-  templateSlider();
+  createsTemplateSlider();
 };
 
 noUiSlider.create(sliderElement, {
   range: {
-    min: SET_OF_FILTERS[0].min,
-    max: SET_OF_FILTERS[0].max,
+    min: FILTERS[0].min,
+    max: FILTERS[0].max,
   },
-  start: SET_OF_FILTERS[0].min,
-  step: SET_OF_FILTERS[0].step,
+  start: FILTERS[0].min,
+  step: FILTERS[0].step,
   connect: 'lower',
 });
 
 const onChangeLevelEffect = () => {
   const sliderLevel = sliderElement.noUiSlider.get() ;
-  if(clickedSet === SET_OF_FILTERS[0]){
-    photoPreview.style.filter = SET_OF_FILTERS[0].style;
+  if(clickedSet === FILTERS[0]){
+    photoPreview.style.filter = FILTERS[0].style;
     hideSlaiderContainer();
   }else{
     photoPreview.style.filter = `${clickedSet.style}(${sliderLevel}${clickedSet.unit})`;

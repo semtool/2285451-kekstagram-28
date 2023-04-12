@@ -20,12 +20,12 @@ checkString ('проверяемая строка', 10);
 // имя_функции('Кекс');  // Результат: false - это не палиндром
 
 function checkPalindrome(phrase){
-  const prePhrase = [];
+  const letters = [];
   let newPhrase;
   for (let i = 0; i <= phrase.length - 1; i++){
 
-    prePhrase.unshift(phrase[i]);
-    newPhrase = prePhrase.join('');
+    letters.unshift(phrase[i]);
+    newPhrase = letters.join('');
   }
   if(phrase.toLowerCase() === newPhrase.toLowerCase()){
     return true;

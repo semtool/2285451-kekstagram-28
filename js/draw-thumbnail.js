@@ -31,7 +31,6 @@ const renderCards = (thumbnailArray) => {
       openBigPictureContainer();
       bigPictureContainer.querySelector('.big-picture__img > img').src = newThumbnail.querySelector('.picture__img').src;
       bigPictureContainer.querySelector('.likes-count').textContent = newThumbnail.querySelector('.picture__likes').textContent;
-      bigPictureContainer.querySelector('.comments-count').textContent = newThumbnail.querySelector('.picture__comments').textContent;
       bigPictureContainer.querySelector('.social__caption').textContent = newThumbnail.querySelector('.picture__img').alt;
 
       const sameId = thumbnailArray.find((thumbnail)=> thumbnail.id === +newThumbnail.dataset.newThumbnailId);
@@ -56,7 +55,7 @@ const renderCards = (thumbnailArray) => {
             newComment.querySelector('.social__text').textContent = sameId.comments[i].message;
             commentstBlock.appendChild(newComment);
             addedComments ++;
-            coutns.innerHTML = `${addedComments} из <span class="comments-count">${sameId.comments.length}</span> комментариев`;
+            coutns.textContent = `${addedComments} из ${sameId.comments.length} комментариев`;
           }
         }
       }

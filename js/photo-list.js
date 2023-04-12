@@ -3,7 +3,7 @@ import { debounce } from './util.js';
 
 const PPORTION_PFOTOS = 10;
 
-const FilterSemples = {
+const FilterSamples = {
   DEFAULT: 'filter-default',
   DISCUSSED: 'filter-discussed',
   RANDOM: 'filter-random',
@@ -30,11 +30,11 @@ const selectFilter = (data) => {
     if (evt.target.classList.contains('img-filters__button')) {
       cleansButtonStatus();
       evt.target.classList.add('img-filters__button--active');
-      if (evt.target.id === FilterSemples.RANDOM) {
+      if (evt.target.id === FilterSamples.RANDOM) {
         filteredData = data.slice().sort(() => Math.random() - 0.5).slice(0, PPORTION_PFOTOS);
-      } else if (evt.target.id === FilterSemples.DISCUSSED) {
+      } else if (evt.target.id === FilterSamples.DISCUSSED) {
         filteredData = data.slice().sort((picA,picB) => picB.comments.length - picA.comments.length);
-      } else if (evt.target.id === FilterSemples.DEFAULT) {
+      } else if (evt.target.id === FilterSamples.DEFAULT) {
         filteredData = data;
       }
       debouncedCleansPicturesContainer(picturesContainer);
